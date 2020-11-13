@@ -16,7 +16,7 @@
     define('VISA_PRD_PWD', 'd5e7nk$M');
     define('VISA_PRD_URL_SECURITY', 'https://apiprod.vnforapps.com/api.security/v1/security');
     define('VISA_PRD_URL_SESSION', 'https://apiprod.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/'.VISA_PRD_MERCHANT_ID);
-    define('VISA_PRD_URL_JS', 'https://static-content.vnforapps.com/v2/js/checkout.js');
+    define('VISA_PRD_URL_JS', 'https://static-content.vnforapps.com/vToken/js/checkout.js');
     define('VISA_PRD_URL_AUTHORIZATION', 'https://apiprod.vnforapps.com/api.authorization/v3/authorization/ecommerce/'.VISA_PRD_MERCHANT_ID);
 
     // Configuración visa
