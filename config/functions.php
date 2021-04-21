@@ -19,15 +19,18 @@
         return $response;
     }
 
-    function generateSesion($amount, $token) {
+    // Consultar al equipo de integraciones los valores a enviar en el objeto antifraude
+    function generateSesion($token) {
         $session = array(
-            'amount' => $amount,
+            'amount' => '1.00',
             'antifraud' => array(
                 'clientIp' => $_SERVER['REMOTE_ADDR'],
                 'merchantDefineData' => array(
-                    'MDD1' => VISA_MERCHANT_ID,
-                    'MDD2' => "Integraciones VisaNet",
-                    'MDD3' => 'paycard'
+                    'MDD4' => 'integraciones.niubiz@necomplus.com',
+                    'MDD21' => '0',
+                    'MDD32' => 'IN00001',
+                    'MDD75' => 'Registrado',
+                    'MDD77' => '69'
                 ),
             ),
             'channel' => 'paycard',
@@ -36,32 +39,12 @@
         $response = json_decode(postRequest(VISA_URL_SESSION, $json, $token));
         return $response->sessionKey;
     }
-
-    function generateAuthorization($amount, $purchaseNumber, $transactionToken, $token) {
-        $data = array(
-            'antifraud' => null,
-            'captureType' => 'manual',
-            'channel' => 'web',
-            'countable' => true,
-            'order' => array(
-                'amount' => $amount,
-                'currency' => 'PEN',
-                'purchaseNumber' => $purchaseNumber,
-                'tokenId' => $transactionToken
-            ),
-            'recurrence' => null,
-            'sponsored' => null
-        );
-        $json = json_encode($data);
-        $session = json_decode(postRequest(VISA_URL_AUTHORIZATION, $json, $token));
-        return $session;
-    }
 	
 	function generateTokenization($transactionToken, $token) {
 		$merchant = VISA_MERCHANT_ID;
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://apitestenv.vnforapps.com/api.ecommerce/v2/ecommerce/token/card/$merchant/$transactionToken",
+            CURLOPT_URL => VISA_URL_TOKENIZATION.$transactionToken,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -119,13 +102,14 @@
                 'purchaseNumber' => $purchaseNumber
             ),
             'card' => array (
-                'tokenId' => $tokenId
+                'tokenId' => $tokenId,
+                'registerFrequent' => 'true',  // Enviar true cuando es el primer pago con el token, del segundo pago en adelante enviar false
+                'useFrequent' => 'false',  // Enviar true a partir del segundo pago
             ),
             'cardHolder' => array (
                 'email' => $email
             )
         );
         $json = json_encode($data);
-        // $session = json_decode(postRequest(VISA_URL_AUTHORIZATION, $json, $token));
         return postRequest(VISA_URL_AUTHORIZATION, $json, $token);
     }

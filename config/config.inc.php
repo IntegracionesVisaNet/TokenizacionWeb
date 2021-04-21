@@ -1,5 +1,6 @@
 <?php
     define("VISA_DEVELOPMENT", true);
+    define("BASE_URL", 'http://localhost:8082/git/TokenizacionWeb/');
 
     // Desarrollo Visa
     define('VISA_DEV_MERCHANT_ID', '342062522');
@@ -8,6 +9,7 @@
     define('VISA_DEV_URL_SECURITY', 'https://apitestenv.vnforapps.com/api.security/v1/security');
     define('VISA_DEV_URL_SESSION', 'https://apitestenv.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/'.VISA_DEV_MERCHANT_ID);
     define('VISA_DEV_URL_JS', 'https://static-content-qas.vnforapps.com/vToken/js/checkout.js');
+    define('VISA_DEV_URL_TOKENIZATION', 'https://apitestenv.vnforapps.com/api.ecommerce/v2/ecommerce/token/card/'.VISA_DEV_MERCHANT_ID.'/');
     define('VISA_DEV_URL_AUTHORIZATION', 'https://apitestenv.vnforapps.com/api.authorization/v3/authorization/ecommerce/'.VISA_DEV_MERCHANT_ID);
 
     // Producción Visa
@@ -17,6 +19,7 @@
     define('VISA_PRD_URL_SECURITY', 'https://apiprod.vnforapps.com/api.security/v1/security');
     define('VISA_PRD_URL_SESSION', 'https://apiprod.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/'.VISA_PRD_MERCHANT_ID);
     define('VISA_PRD_URL_JS', 'https://static-content.vnforapps.com/vToken/js/checkout.js');
+    define('VISA_PRD_URL_TOKENIZATION', 'https://apiprod.vnforapps.com/api.ecommerce/v2/ecommerce/token/card/'.VISA_DEV_MERCHANT_ID.'/');
     define('VISA_PRD_URL_AUTHORIZATION', 'https://apiprod.vnforapps.com/api.authorization/v3/authorization/ecommerce/'.VISA_PRD_MERCHANT_ID);
 
     // Configuración visa
@@ -26,4 +29,5 @@
     define('VISA_URL_SECURITY', VISA_DEVELOPMENT ? VISA_DEV_URL_SECURITY : VISA_PRD_URL_SECURITY);
     define('VISA_URL_SESSION', VISA_DEVELOPMENT ? VISA_DEV_URL_SESSION : VISA_PRD_URL_SESSION);
     define('VISA_URL_JS', VISA_DEVELOPMENT ? VISA_DEV_URL_JS : VISA_PRD_URL_JS);
+    define('VISA_URL_TOKENIZATION', VISA_DEVELOPMENT ? VISA_DEV_URL_TOKENIZATION : VISA_PRD_URL_TOKENIZATION);
     define('VISA_URL_AUTHORIZATION', VISA_DEVELOPMENT ? VISA_DEV_URL_AUTHORIZATION : VISA_PRD_URL_AUTHORIZATION);

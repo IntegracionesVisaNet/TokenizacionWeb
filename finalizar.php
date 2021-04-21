@@ -2,14 +2,10 @@
     include 'config/functions.php';
     $transactionToken = $_POST["transactionToken"];
     $email = $_POST["customerEmail"];
-    $amount = $_GET["amount"];
     $purchaseNumber = $_GET["purchaseNumber"];    
 
     $token = generateToken();
-
     $data = generateTokenization($transactionToken, $token);
-    // echo json_encode(json_decode($data), JSON_PRETTY_PRINT);
-    // var_dump($data);
     $json = json_decode($data);
 ?>
 
@@ -27,7 +23,7 @@
     <div class="container-fluid">
         <hr>
         <p><b>Token generado: </b> <?php echo $json->token->tokenId;?></p>
-        <p><a href="http://localhost:8082/tokenizacion_web/autorizar.php">Probar una autorización</a></p>
+        <p><a href="<?php echo BASE_URL;?>autorizar.php">Probar una autorización</a></p>
 
         <hr>
 
